@@ -1,0 +1,72 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZeianRusselll1/Kavo-UI-Library/main/Movable.source.lua"))()
+local Window = Library.CreateLib("Qilin Hub💀", "Ocean")
+
+--tab1
+local Tab = Window:NewTab("DEAD RAILS")
+local Section = Tab:NewSection("DEAD RAILS")
+Section:NewLabel("dead rails")
+Section:NewButton("DEAD RAILS SCRIPT EGG NUNT", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/refs/heads/main/DeadRails", true))("https://t.me/qlnscrpt")
+end)
+Section:NewButton("dead rails script esp", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://norepinefrina.com"))("https://t.me/qlnscrpt" )
+end)
+Section:NewButton("dead rails script: esp,kill aura,auto win,aimbot", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/InfernusScripts/Null-Fire/main/Loader"))("https://t.me/qlnscrpt")
+end)
+Section:NewButton("DEAD RAILS SCRIPT TP TO END,NOCLIP", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/TwoGunVolley/Dedrail/refs/heads/main/Protected_8860927939362090.txt"))()
+end)
+
+--tab2
+local Tab = Window:NewTab("BLOX FRUITS")
+local Section2 = Tab:NewSection("BLOX FRUITS")
+Section2:NewButton("Blox Fruits: Auto Farm, Aimbot, Teleports", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://gitshare.me/backend/api/files/85d9647d-6f81-4c73-ad96-2fc3e88b5b04/download"))()
+end)
+
+--tab3
+local Tab = Window:NewTab("BLADE-BALL")
+local Section3 = Tab:NewSection("BLADE BALL")
+Section3:NewButton("Blade ball: Auto parry", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Fspl0it/Zephyr-/refs/heads/main/Protected_7817091414706884.txt"))("https://t.me/qlnscrpt")
+end)
+
+--tab4
+local Tab = Window:NewTab("MM2")
+local Section4 = Tab:NewSection("MM2")
+Section4:NewButton("MM2 script,aimbot,esp,auto pick up", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/FOGOTY/mm2-piano-reborn/refs/heads/main/scr"))("https://t.me/qlnscrpt")
+end)
+
+--tab5
+local Tab = Window:NewTab("RIVALS")
+local Section5 = Tab:NewSection("RIVALS")
+Section5:NewButton("RIVALS script: Aimbot, SilentAim, Gun Mods
+", "ButtonInfo", function()
+    loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e945f55997c4240abc865c0bcc2136c5.lua"))()
+end)
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ScreenGui"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+ 
+local Toggle = Instance.new("TextButton")
+Toggle.Name = "Toggle"
+Toggle.Parent = ScreenGui
+Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Toggle.Position = UDim2.new(0, 0, 0.454706937, 0)
+Toggle.Size = UDim2.new(0, 90, 0, 38)
+Toggle.Font = Enum.Font.SourceSans
+Toggle.Text = "Tutorial"
+Toggle.TextColor3 = Color3.fromRGB(248, 248, 248)
+Toggle.TextSize = 28.000
+Toggle.Draggable = true
+Toggle.MouseButton1Click:connect(function()
+    Library:ToggleUI()
+end)
+ 
+local Corner = Instance.new("UICorner")
+Corner.Name = "Corner"
+Corner.Parent = Toggle
