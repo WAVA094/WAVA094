@@ -64,7 +64,7 @@ end
 
 local function enterKey()
     local userInputKey = textBox.Text
-    local correctKey = "qilin"
+    local correctKey = "qilin2024"
 
     if userInputKey == correctKey then
         local scriptURL = "scriptlink"
