@@ -29,6 +29,10 @@ end})
 Tab2:AddButton({"DEAD RAILS SCRIPT EGG HUNT ", function(Value)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/refs/heads/main/DeadRails", true))("https://t.me/qlnscrpt")
 end})
+Tab2:AddButton({"DEAD RAILS AUTO BONDS", function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/thiennrb7/Script/refs/heads/main/autobond", true))(setclipboard("https://t.me/qlnscrpt"))
+end})
+
 
 
 --tab3
