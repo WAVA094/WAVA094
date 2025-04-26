@@ -26,6 +26,10 @@ local Tab2 = Window:MakeTab({"DEAD RAILS 🏜️", "Тест"})
 Tab2:AddButton({"DEAD RAILS SCRIPT TP TO CASTLE, TP TO END", function(Value)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/TwoGunVolley/Dedrail/refs/heads/main/Protected_8860927939362090.txt"))("https://t.me/RHOSCRIPTS")
 end})
+Tab2:AddButton({"DEAD RAILS SCRIPT EGG HUNT ", function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/refs/heads/main/DeadRails", true))("https://t.me/qlnscrpt")
+end})
+
 
 --tab3
 local Tab3 = Window:MakeTab({"MM2 SCRIPT🔪", "Тест"}) 
