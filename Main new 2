@@ -41,3 +41,10 @@ Tab3:AddButton({"MM2 SCRIPT: AIMBOT, ESP, TROLL, AND MORE ", function(Value)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FOGOTY/mm2-piano-reborn/refs/heads/main/scr"))()
 end}) 
 
+--tab4
+local Tab4 = Window:MakeTab({"BLOX FRUITS⚔️", "Тест"}) 
+Tab4:AddButton({"BLOX FRUITS SCRIPT: AUTO FARM LVL, AUTO FARM CHEST, ", function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/farghii/relzhub/refs/heads/main/loader.lua"))("https://t.me/qlnscrpt")
+end}) 
+
+
