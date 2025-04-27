@@ -49,7 +49,7 @@ getKeyButton.TextSize = 18
 getKeyButton.Parent = frame
 
 local function setClipboardWithURL()
-    setclipboard("https://rekonise.com/qilin-hub-key-ykies")
+    setclipboard("https://rekonise.com/qilin-hub-o1stc")
 end
 
 getKeyButton.MouseButton1Click:Connect(setClipboardWithURL)
@@ -64,7 +64,7 @@ end
 
 local function enterKey()
     local userInputKey = textBox.Text
-    local correctKey = "qilin2007"
+    local correctKey = "qilin2000"
 
     if userInputKey == correctKey then
         local scriptURL = "scriptlink"
