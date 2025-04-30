@@ -73,7 +73,7 @@ Status.TextSize = 14
 
 -- Список валидных ключей (можно заменить на запрос к серверу)
 local validKeys = {
-    "ROBLOX123",
+    "qilin2000",
     "GAMING456",
     "SCRIPT789",
     "LUAKEY101",
@@ -99,7 +99,7 @@ GetKeyButton.MouseButton1Click:Connect(function()
     
     -- В Roblox Studio можно использовать setclipboard, в реальной игре это не сработает
     pcall(function()
-        setclipboard(link)
+        setclipboard(https://rekonise.com/qilin-hub-o1stc)
     end)
     
     Status.Text = "Status: Link copied to clipboard (or shown in output)"
