@@ -1,0 +1,147 @@
+-- Создаем основной GUI
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local GetKeyButton = Instance.new("TextButton")
+local KeyBox = Instance.new("TextBox")
+local CheckKeyButton = Instance.new("TextButton")
+local Title = Instance.new("TextLabel")
+local Status = Instance.new("TextLabel")
+
+-- Настройка GUI
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Name = "KeySystem"
+ScreenGui.ResetOnSpawn = false
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+Frame.Size = UDim2.new(0, 300, 0, 200)
+Frame.Active = true
+Frame.Draggable = true
+
+Title.Name = "Title"
+Title.Parent = Frame
+Title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Font = Enum.Font.SourceSans
+Title.Text = "Key System"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 20
+
+GetKeyButton.Name = "GetKeyButton"
+GetKeyButton.Parent = Frame
+GetKeyButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+GetKeyButton.Position = UDim2.new(0.1, 0, 0.3, 0)
+GetKeyButton.Size = UDim2.new(0.8, 0, 0, 30)
+GetKeyButton.Font = Enum.Font.SourceSans
+GetKeyButton.Text = "Get Key (Copy Link)"
+GetKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+GetKeyButton.TextSize = 16
+
+KeyBox.Name = "KeyBox"
+KeyBox.Parent = Frame
+KeyBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+KeyBox.Position = UDim2.new(0.1, 0, 0.5, 0)
+KeyBox.Size = UDim2.new(0.8, 0, 0, 30)
+KeyBox.Font = Enum.Font.SourceSans
+KeyBox.PlaceholderText = "Enter your key here"
+KeyBox.Text = ""
+KeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeyBox.TextSize = 16
+KeyBox.ClearTextOnFocus = false
+
+CheckKeyButton.Name = "CheckKeyButton"
+CheckKeyButton.Parent = Frame
+CheckKeyButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+CheckKeyButton.Position = UDim2.new(0.1, 0, 0.7, 0)
+CheckKeyButton.Size = UDim2.new(0.8, 0, 0, 30)
+CheckKeyButton.Font = Enum.Font.SourceSans
+CheckKeyButton.Text = "Check Key"
+CheckKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CheckKeyButton.TextSize = 16
+
+Status.Name = "Status"
+Status.Parent = Frame
+Status.BackgroundTransparency = 1
+Status.Position = UDim2.new(0.1, 0, 0.85, 0)
+Status.Size = UDim2.new(0.8, 0, 0, 20)
+Status.Font = Enum.Font.SourceSans
+Status.Text = "Status: Waiting for key..."
+Status.TextColor3 = Color3.fromRGB(255, 255, 255)
+Status.TextSize = 14
+
+-- Список валидных ключей (можно заменить на запрос к серверу)
+local validKeys = {
+    "ROBLOX123",
+    "GAMING456",
+    "SCRIPT789",
+    "LUAKEY101",
+    "DEVELOPER"
+}
+
+-- Функция для проверки ключа
+local function isValidKey(key)
+    key = string.upper(string.gsub(key, "%s+", "")) -- Удаляем пробелы и переводим в верхний регистр
+    
+    for _, validKey in pairs(validKeys) do
+        if key == validKey then
+            return true
+        end
+    end
+    return false
+end
+
+-- Обработчик кнопки Get Key
+GetKeyButton.MouseButton1Click:Connect(function()
+    -- В Roblox нельзя напрямую работать с буфером обмена, поэтому показываем ссылку
+    local link = "https://example.com/get-key" -- Замените на свою ссылку
+    
+    -- В Roblox Studio можно использовать setclipboard, в реальной игре это не сработает
+    pcall(function()
+        setclipboard(link)
+    end)
+    
+    Status.Text = "Status: Link copied to clipboard (or shown in output)"
+    print("Get your key from: " .. link)
+    
+    -- Через 3 секунды сбрасываем статус
+    wait(3)
+    Status.Text = "Status: Waiting for key..."
+end)
+
+-- Обработчик кнопки Check Key
+CheckKeyButton.MouseButton1Click:Connect(function()
+    local key = KeyBox.Text
+    
+    if key == "" then
+        Status.Text = "Status: Please enter a key!"
+        Status.TextColor3 = Color3.fromRGB(255, 100, 100)
+        return
+    end
+    
+    if isValidKey(key) then
+        Status.Text = "Status: Key is VALID! Loading script..."
+        Status.TextColor3 = Color3.fromRGB(100, 255, 100)
+        
+        -- Выполняем loadstring если ключ правильный
+        local success, err = pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/Main%20new%202" , true))()
+        end)
+        
+        if not success then
+            Status.Text = "Status: Error loading script!"
+            Status.TextColor3 = Color3.fromRGB(255, 100, 100)
+            warn("Error loading script: " .. err)
+        end
+        
+    else
+        Status.Text = "Status: Key is INVALID! Access denied."
+        Status.TextColor3 = Color3.fromRGB(255, 100, 100)
+    end
+    
+    -- Через 5 секунд сбрасываем статус
+    wait(5)
+    Status.Text = "Status: Waiting for key..."
+    Status.TextColor3 = Color3.fromRGB(255, 255, 255)
+end) 
