@@ -47,4 +47,11 @@ Tab4:AddButton({"BLOX FRUITS SCRIPT: AUTO FARM LVL, AUTO FARM CHEST, ", function
 loadstring(game:HttpGet("https://raw.githubusercontent.com/farghii/relzhub/refs/heads/main/loader.lua"))("https://t.me/qlnscrpt")
 end}) 
 
+--tab5
+local Tab5 = Window:MakeTab({"GROW A GARDEN🎋", "Тест"}) 
+Tab5:AddButton({"GROW A GARDEN SCRIPT: dupe seeds, auto farm, auto sell", function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/GrowaGarden"))(setclipboard("https://t.me/qlnscrpt"))
+end}) 
+
+
 
