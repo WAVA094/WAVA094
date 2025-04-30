@@ -73,7 +73,7 @@ Status.TextSize = 14
 
 -- Список валидных ключей (можно заменить на запрос к серверу)
 local validKeys = {
-    "qilin2000",
+    "QILIN2000",
     "GAMING456",
     "SCRIPT789",
     "LUAKEY101",
@@ -95,7 +95,7 @@ end
 -- Обработчик кнопки Get Key
 GetKeyButton.MouseButton1Click:Connect(function()
     -- В Roblox нельзя напрямую работать с буфером обмена, поэтому показываем ссылку
-    local link = "https://rekonise.com/qilin-hub-o1stc" -- Замените на свою ссылку
+    local link = "https://example.com/get-key" -- Замените на свою ссылку
     
     -- В Roblox Studio можно использовать setclipboard, в реальной игре это не сработает
     pcall(function()
@@ -126,7 +126,7 @@ CheckKeyButton.MouseButton1Click:Connect(function()
         
         -- Выполняем loadstring если ключ правильный
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/Main%20new%202" , true))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/Main%20new%202", true))()
         end)
         
         if not success then
@@ -144,4 +144,4 @@ CheckKeyButton.MouseButton1Click:Connect(function()
     wait(5)
     Status.Text = "Status: Waiting for key..."
     Status.TextColor3 = Color3.fromRGB(255, 255, 255)
-end) 
+end)
