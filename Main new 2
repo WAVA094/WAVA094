@@ -52,6 +52,9 @@ local Tab5 = Window:MakeTab({"GROW A GARDEN🎋", "Тест"})
 Tab5:AddButton({"GROW A GARDEN SCRIPT: dupe seeds, auto farm, auto sell", function(Value)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/GrowaGarden"))(setclipboard("https://t.me/qlnscrpt"))
 end}) 
+Tab5:AddButton({"GROW A GARDEN SCRIPT:auto farm, auto sell, auto seed", function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/GrowaGarden"))("")
+end}) 
 
 
 
