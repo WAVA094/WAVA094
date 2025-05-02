@@ -1,6 +1,6 @@
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
 local Window = redzlib:MakeWindow({
-  Title = "QILIN HUB💀 beta 0.7",
+  Title = "QILIN HUB💀 beta 0.9",
   SubTitle = "https://t.me/qlnscrpt",
   SaveFolder = "Redz library"
 })
@@ -54,6 +54,12 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/
 end}) 
 Tab5:AddButton({"GROW A GARDEN SCRIPT:auto farm, auto sell, auto seed", function(Value)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/GrowaGarden"))("")
+end}) 
+
+--tab6
+local Tab6 = Window:MakeTab({"Volleyball Legends🏐", "Тест"}) 
+Tab6:AddButton({"Volleyball Legends script ", function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/raydjs/napoleonHub/refs/heads/main/src.lua"))("https://t.me/RHOSCRIPTS")
 end}) 
 
 
