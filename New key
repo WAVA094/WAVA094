@@ -73,7 +73,7 @@ Status.TextSize = 14
 
 -- Список валидных ключей (можно заменить на запрос к серверу)
 local validKeys = {
-    "QILIN2000",
+    "QILIN7000",
     "GAMING456",
     "SCRIPT789",
     "LUAKEY101",
