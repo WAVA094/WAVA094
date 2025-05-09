@@ -61,6 +61,11 @@ local Tab6 = Window:MakeTab({"Volleyball Legends🏐", "Тест"})
 Tab6:AddButton({"Volleyball Legends script ", function(Value)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/raydjs/napoleonHub/refs/heads/main/src.lua"))("https://t.me/RHOSCRIPTS")
 end}) 
+--tab7
+local Tab7 = Window:MakeTab({"FORSAKEN🧛", "Тест"})
+Tab7:AddButton({"FORSAKEN SCRIPT:Aimbot, esp,quick generators", function(Value)
+loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/ivannetta/ShitScripts/refs/heads/main/forsaken.lua")))("https://t.me/RHOSCRIPTS")
+end}) 
 
 
 
