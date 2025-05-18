@@ -118,7 +118,7 @@ end
 
 -- Обработчик кнопки Get Key
 GetKeyButton.MouseButton1Click:Connect(function()
-    local link = "https://example.com/get-key" -- Замените на реальную ссылку
+    local link = "https://rekonise.com/qilin-hub-phkly" -- Замените на реальную ссылку
     
     pcall(function()
         setclipboard(link)
