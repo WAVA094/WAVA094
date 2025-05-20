@@ -196,7 +196,7 @@ end)
 
 -- Обработчик кнопки Free Hub
 FreeHubButton.MouseButton1Click:Connect(function()
-    local freeLink = ""
+    local freeLink = "https://go.linkify.ru/1oMB"
     
     pcall(function()
         setclipboard(freeLink)
