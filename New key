@@ -1,11 +1,12 @@
 -- Создаем основной GUI
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
-local GetKeyButton = Instance.new("TextButton")
 local KeyBox = Instance.new("TextBox")
 local CheckKeyButton = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local Status = Instance.new("TextLabel")
+local PremiumHubButton = Instance.new("TextButton")
+local FreeHubButton = Instance.new("TextButton")
 
 -- Настройка GUI
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -16,7 +17,7 @@ Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
-Frame.Size = UDim2.new(0, 300, 0, 200)
+Frame.Size = UDim2.new(0, 300, 0, 250)
 Frame.Active = true
 Frame.Draggable = true
 
@@ -29,20 +30,10 @@ Title.Text = "Key System"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextSize = 20
 
-GetKeyButton.Name = "GetKeyButton"
-GetKeyButton.Parent = Frame
-GetKeyButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-GetKeyButton.Position = UDim2.new(0.1, 0, 0.3, 0)
-GetKeyButton.Size = UDim2.new(0.8, 0, 0, 30)
-GetKeyButton.Font = Enum.Font.SourceSans
-GetKeyButton.Text = "Get Key (Copy Link)"
-GetKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-GetKeyButton.TextSize = 16
-
 KeyBox.Name = "KeyBox"
 KeyBox.Parent = Frame
 KeyBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-KeyBox.Position = UDim2.new(0.1, 0, 0.5, 0)
+KeyBox.Position = UDim2.new(0.1, 0, 0.25, 0)
 KeyBox.Size = UDim2.new(0.8, 0, 0, 30)
 KeyBox.Font = Enum.Font.SourceSans
 KeyBox.PlaceholderText = "Enter your key here"
@@ -54,12 +45,32 @@ KeyBox.ClearTextOnFocus = false
 CheckKeyButton.Name = "CheckKeyButton"
 CheckKeyButton.Parent = Frame
 CheckKeyButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-CheckKeyButton.Position = UDim2.new(0.1, 0, 0.7, 0)
+CheckKeyButton.Position = UDim2.new(0.1, 0, 0.4, 0)
 CheckKeyButton.Size = UDim2.new(0.8, 0, 0, 30)
 CheckKeyButton.Font = Enum.Font.SourceSans
 CheckKeyButton.Text = "Check Key"
 CheckKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 CheckKeyButton.TextSize = 16
+
+PremiumHubButton.Name = "PremiumHubButton"
+PremiumHubButton.Parent = Frame
+PremiumHubButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+PremiumHubButton.Position = UDim2.new(0.1, 0, 0.55, 0)
+PremiumHubButton.Size = UDim2.new(0.38, 0, 0, 25)
+PremiumHubButton.Font = Enum.Font.SourceSans
+PremiumHubButton.Text = "Premium hub"
+PremiumHubButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PremiumHubButton.TextSize = 14
+
+FreeHubButton.Name = "FreeHubButton"
+FreeHubButton.Parent = Frame
+FreeHubButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+FreeHubButton.Position = UDim2.new(0.52, 0, 0.55, 0)
+FreeHubButton.Size = UDim2.new(0.38, 0, 0, 25)
+FreeHubButton.Font = Enum.Font.SourceSans
+FreeHubButton.Text = "Free hub"
+FreeHubButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+FreeHubButton.TextSize = 14
 
 Status.Name = "Status"
 Status.Parent = Frame
@@ -71,22 +82,49 @@ Status.Text = "Status: Waiting for key..."
 Status.TextColor3 = Color3.fromRGB(255, 255, 255)
 Status.TextSize = 14
 
--- Список валидных ключей
-local validKeys = {
-    "QILIN7000",
-    "GAMING456",
-    "SCRIPT789",
-    "LUAKEY101",
-    "DEVELOPER"
+-- Список валидных ключей и их скриптов
+local keyScripts = {
+    ["PREMIUM123"] = {
+        scriptLink = "https://raw.githubusercontent.com/example/premium-script.lua",
+        message = "Premium script loaded!",
+        color = Color3.fromRGB(100, 255, 100)
+    },
+    ["FREE456"] = {
+        scriptLink = "https://raw.githubusercontent.com/example/free-script.lua",
+        message = "Free script loaded!",
+        color = Color3.fromRGB(100, 200, 255)
+    },
+    ["QILIN2000"] = {
+        scriptLink = "https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/Main%20new%202",
+        message = "Main script loaded!",
+        color = Color3.fromRGB(100, 255, 100)
+    }
 }
 
 -- Функция для проверки ключа
 local function isValidKey(key)
     key = string.upper(string.gsub(key, "%s+", ""))
+    return keyScripts[key] ~= nil
+end
+
+-- Функция для запуска соответствующего скрипта
+local function loadScript(key)
+    local keyData = keyScripts[string.upper(string.gsub(key, "%s+", ""))]
     
-    for _, validKey in pairs(validKeys) do
-        if key == validKey then
+    if keyData then
+        local success, err = pcall(function()
+            loadstring(game:HttpGet(keyData.scriptLink, true))()
+        end)
+        
+        if success then
+            Status.Text = "Status: " .. keyData.message
+            Status.TextColor3 = keyData.color
             return true
+        else
+            Status.Text = "Status: Error loading script!"
+            Status.TextColor3 = Color3.fromRGB(255, 100, 100)
+            warn("Error loading script: " .. err)
+            return false
         end
     end
     return false
@@ -116,21 +154,6 @@ local function startAutoChat()
     end
 end
 
--- Обработчик кнопки Get Key
-GetKeyButton.MouseButton1Click:Connect(function()
-    local link = "https://rekonise.com/qilin-hub-phkly" -- Замените на реальную ссылку
-    
-    pcall(function()
-        setclipboard(link)
-    end)
-    
-    Status.Text = "Status: Link copied to clipboard (or shown in output)"
-    print("Get your key from: " .. link)
-    
-    wait(3)
-    Status.Text = "Status: Waiting for key..."
-end)
-
 -- Обработчик кнопки Check Key
 CheckKeyButton.MouseButton1Click:Connect(function()
     local key = KeyBox.Text
@@ -142,23 +165,10 @@ CheckKeyButton.MouseButton1Click:Connect(function()
     end
     
     if isValidKey(key) then
-        Status.Text = "Status: Key is VALID! Loading script..."
-        Status.TextColor3 = Color3.fromRGB(100, 255, 100)
-        
-        -- Загружаем основной скрипт
-        local success, err = pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/Main%20new%202", true))()
-        end)
-        
-        if success then
-            -- Запускаем авто-чат только если основной скрипт загрузился
+        if loadScript(key) then
+            -- Запускаем авто-чат только если скрипт загрузился
             task.spawn(startAutoChat)
-        else
-            Status.Text = "Status: Error loading script!"
-            Status.TextColor3 = Color3.fromRGB(255, 100, 100)
-            warn("Error loading script: " .. err)
         end
-        
     else
         Status.Text = "Status: Key is INVALID! Access denied."
         Status.TextColor3 = Color3.fromRGB(255, 100, 100)
@@ -167,4 +177,34 @@ CheckKeyButton.MouseButton1Click:Connect(function()
     wait(5)
     Status.Text = "Status: Waiting for key..."
     Status.TextColor3 = Color3.fromRGB(255, 255, 255)
+end)
+
+-- Обработчик кнопки Premium Hub
+PremiumHubButton.MouseButton1Click:Connect(function()
+    local premiumLink = "https://example.com/premium-hub"
+    
+    pcall(function()
+        setclipboard(premiumLink)
+    end)
+    
+    Status.Text = "Status: Premium hub link copied!"
+    print("Premium hub link: " .. premiumLink)
+    
+    wait(3)
+    Status.Text = "Status: Waiting for key..."
+end)
+
+-- Обработчик кнопки Free Hub
+FreeHubButton.MouseButton1Click:Connect(function()
+    local freeLink = "https://example.com/free-hub"
+    
+    pcall(function()
+        setclipboard(freeLink)
+    end)
+    
+    Status.Text = "Status: Free hub link copied!"
+    print("Free hub link: " .. freeLink)
+    
+    wait(3)
+    Status.Text = "Status: Waiting for key..."
 end)
