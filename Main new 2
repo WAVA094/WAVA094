@@ -58,6 +58,9 @@ end})
 Tab5:AddButton({"GROW A GARDEN SCRIPT:dupe seeds work, auto sell, auto farm", function(Value)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/kosowa/asd/refs/heads/main/GaG.lua"))()
 end}) 
+Tab5:AddButton({"GROW A GARDEN SCRIPT:Auto sell, auto pickup ", function(Value)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nebula-xyzs/GAG/refs/heads/main/GrowAGardenXE"))()
+end}) 
 
 --tab6
 local Tab6 = Window:MakeTab({"Volleyball Legends🏐", "Тест"}) 
