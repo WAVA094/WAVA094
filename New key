@@ -181,7 +181,7 @@ end)
 
 -- Обработчик кнопки Premium Hub
 PremiumHubButton.MouseButton1Click:Connect(function()
-    local premiumLink = "https://example.com/premium-hub"
+    local premiumLink = "https://t.me/Qilin_coins_bot"
     
     pcall(function()
         setclipboard(premiumLink)
