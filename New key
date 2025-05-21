@@ -1,8 +1,8 @@
--- Проверяем, не был ли уже создан интерфейс
+-- Проверка, чтобы система не создавалась повторно
 if _G.KeySystemLoaded then return end
 _G.KeySystemLoaded = true
 
--- Создаем основной GUI
+-- Создаем GUI
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local KeyBox = Instance.new("TextBox")
@@ -12,22 +12,19 @@ local Status = Instance.new("TextLabel")
 local PremiumHubButton = Instance.new("TextButton")
 local FreeHubButton = Instance.new("TextButton")
 
--- Настройка GUI
+-- Настройка интерфейса
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.Name = "KeySystem"
 ScreenGui.ResetOnSpawn = false
 
--- Настройка основного фрейма
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0.5, -150, 0.5, -125)
 Frame.Size = UDim2.new(0, 300, 0, 250)
-Frame.ClipsDescendants = true
 Frame.Active = true
 Frame.Draggable = true
 
--- Настройка заголовка
 Title.Name = "Title"
 Title.Parent = Frame
 Title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -37,53 +34,47 @@ Title.Text = "KEY SYSTEM"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextSize = 20
 
--- Настройка поля ввода ключа
 KeyBox.Name = "KeyBox"
 KeyBox.Parent = Frame
 KeyBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 KeyBox.Position = UDim2.new(0.1, 0, 0.25, 0)
 KeyBox.Size = UDim2.new(0.8, 0, 0, 30)
 KeyBox.Font = Enum.Font.Gotham
-KeyBox.PlaceholderText = "Enter your key here"
+KeyBox.PlaceholderText = "Enter key here"
 KeyBox.Text = ""
 KeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 KeyBox.TextSize = 16
-KeyBox.ClearTextOnFocus = false
 
--- Настройка кнопки проверки ключа
 CheckKeyButton.Name = "CheckKeyButton"
 CheckKeyButton.Parent = Frame
 CheckKeyButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 CheckKeyButton.Position = UDim2.new(0.1, 0, 0.4, 0)
 CheckKeyButton.Size = UDim2.new(0.8, 0, 0, 30)
 CheckKeyButton.Font = Enum.Font.GothamBold
-CheckKeyButton.Text = "CHECK KEY"
+CheckKeyButton.Text = "ACTIVATE KEY"
 CheckKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 CheckKeyButton.TextSize = 16
 
--- Настройка кнопки Premium Hub
 PremiumHubButton.Name = "PremiumHubButton"
 PremiumHubButton.Parent = Frame
 PremiumHubButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 PremiumHubButton.Position = UDim2.new(0.1, 0, 0.55, 0)
 PremiumHubButton.Size = UDim2.new(0.38, 0, 0, 25)
 PremiumHubButton.Font = Enum.Font.Gotham
-PremiumHubButton.Text = "PREMIUM HUB"
+PremiumHubButton.Text = "PREMIUM"
 PremiumHubButton.TextColor3 = Color3.fromRGB(255, 215, 0)
 PremiumHubButton.TextSize = 14
 
--- Настройка кнопки Free Hub
 FreeHubButton.Name = "FreeHubButton"
 FreeHubButton.Parent = Frame
 FreeHubButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 FreeHubButton.Position = UDim2.new(0.52, 0, 0.55, 0)
 FreeHubButton.Size = UDim2.new(0.38, 0, 0, 25)
 FreeHubButton.Font = Enum.Font.Gotham
-FreeHubButton.Text = "FREE HUB"
+FreeHubButton.Text = "FREE"
 FreeHubButton.TextColor3 = Color3.fromRGB(100, 200, 255)
 FreeHubButton.TextSize = 14
 
--- Настройка статусной строки
 Status.Name = "Status"
 Status.Parent = Frame
 Status.BackgroundTransparency = 1
@@ -94,41 +85,56 @@ Status.Text = "Status: Waiting for key..."
 Status.TextColor3 = Color3.fromRGB(255, 255, 255)
 Status.TextSize = 14
 
--- Список валидных ключей и их скриптов
+-- Список ключей и соответствующих скриптов
 local keyScripts = {
     ["PREMIUM123"] = {
-        message = "Premium script loaded!",
-        color = Color3.fromRGB(100, 255, 100),
+        message = "Premium activated!",
+        color = Color3.fromRGB(0, 255, 0),
         action = function()
-            -- Действия для премиум скрипта
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/New%20key", true))(setclipboard("https://t.me/qlnscrpt"))
+            -- Загрузка премиум скрипта
+            local success, err = pcall(function()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/Main%20new%202", true))()
+            end)
+            if not success then
+                warn("Premium script error: "..err)
+            end
         end
     },
     ["FREE456"] = {
-        message = "Free script loaded!",
-        color = Color3.fromRGB(100, 200, 255),
+        message = "Free version activated!",
+        color = Color3.fromRGB(0, 200, 255),
         action = function()
-            -- Действия для бесплатного скрипта
-            print("Free features activated!")
+            -- Загрузка бесплатного скрипта
+            local success, err = pcall(function()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/refs/heads/main/Main%20new%202", true))()
+            end)
+            if not success then
+                warn("Free script error: "..err)
+            end
         end
     },
     ["QILIN2000"] = {
         message = "Main script loaded!",
-        color = Color3.fromRGB(100, 255, 100),
+        color = Color3.fromRGB(0, 255, 0),
         action = function()
-            -- Действия для основного скрипта
-            print("Main features activated!")
+            -- Загрузка основного скрипта
+            local success, err = pcall(function()
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/WAVA094/WAVA094/main/Main%20new%202", true))()
+            end)
+            if not success then
+                warn("Main script error: "..err)
+            end
         end
     }
 }
 
--- Функция для проверки ключа
+-- Функция проверки ключа
 local function isValidKey(key)
     key = string.upper(string.gsub(key, "%s+", ""))
     return keyScripts[key] ~= nil
 end
 
--- Функция для анимации кнопок
+-- Анимация кнопки
 local function animateButton(button)
     local originalSize = button.Size
     game:GetService("TweenService"):Create(
@@ -144,93 +150,63 @@ local function animateButton(button)
     ):Play()
 end
 
--- Функция для выполнения действий по ключу
-local function executeKeyAction(key)
-    local keyData = keyScripts[string.upper(string.gsub(key, "%s+", ""))]
-    
-    if keyData then
-        keyData.action()
-        Status.Text = "Status: " .. keyData.message
-        Status.TextColor3 = keyData.color
-        return true
-    end
-    return false
-end
-
--- Функция для авто-отправки сообщений
-local function startAutoChat()
-    local TextChatService = game:GetService("TextChatService")
-    local message = "скачать читы и скрипты можно в телеграм канале qilin scripts le le le le le le le le le le le"
-    local interval = 300 -- 5 минут в секундах
-
-    while true do
-        if TextChatService.TextChannels:FindFirstChild("RBXGeneral") then
-            local success, err = pcall(function()
-                TextChatService.TextChannels.RBXGeneral:SendAsync(message)
-            end)
-            
-            if success then
-                print("✅ Сообщение отправлено: " .. message)
-            else
-                warn("❌ Ошибка: " .. err)
-            end
-        else
-            warn("❌ Чат RBXGeneral не найден!")
-        end
-        wait(interval)
-    end
-end
-
--- Обработчики кнопок
+-- Обработчик кнопки Check Key
 CheckKeyButton.MouseButton1Click:Connect(function()
     animateButton(CheckKeyButton)
     
     local key = KeyBox.Text
     
     if key == "" then
-        Status.Text = "Status: Please enter a key!"
-        Status.TextColor3 = Color3.fromRGB(255, 100, 100)
+        Status.Text = "Please enter a key!"
+        Status.TextColor3 = Color3.fromRGB(255, 50, 50)
         return
     end
     
     if isValidKey(key) then
-        if executeKeyAction(key) then
-            task.spawn(startAutoChat)
+        local keyData = keyScripts[string.upper(string.gsub(key, "%s+", ""))]
+        
+        -- Выполняем соответствующий скрипт
+        keyData.action()
+        
+        Status.Text = keyData.message
+        Status.TextColor3 = keyData.color
+        
+        -- Авто-чат только для основного скрипта
+        if key == "QILIN2000" then
+            task.spawn(function()
+                while true do
+                    pcall(function()
+                        game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(
+                            "Download scripts at qilin scripts!"
+                        )
+                    end)
+                    wait(300)
+                end
+            end)
         end
     else
-        Status.Text = "Status: Key is INVALID! Access denied."
-        Status.TextColor3 = Color3.fromRGB(255, 100, 100)
+        Status.Text = "Invalid key!"
+        Status.TextColor3 = Color3.fromRGB(255, 50, 50)
     end
-    
-    wait(5)
-    Status.Text = "Status: Waiting for key..."
-    Status.TextColor3 = Color3.fromRGB(255, 255, 255)
 end)
 
+-- Обработчики кнопок Premium и Free Hub
 PremiumHubButton.MouseButton1Click:Connect(function()
     animateButton(PremiumHubButton)
-    
-    local premiumLink = "https://example.com/premium-hub"
-    setclipboard(premiumLink)
-    
-    Status.Text = "Status: Premium hub link copied!"
+    setclipboard("https://example.com/premium-hub")
+    Status.Text = "Premium link copied!"
     Status.TextColor3 = Color3.fromRGB(255, 215, 0)
-    
     wait(3)
-    Status.Text = "Status: Waiting for key..."
+    Status.Text = "Status: Waiting..."
     Status.TextColor3 = Color3.fromRGB(255, 255, 255)
 end)
 
 FreeHubButton.MouseButton1Click:Connect(function()
     animateButton(FreeHubButton)
-    
-    local freeLink = "https://go.linkify.ru/1oMB"
-    setclipboard(freeLink)
-    
-    Status.Text = "Status: Free hub link copied!"
+    setclipboard("https://rekonise.com/myhub-jxqyt")
+    Status.Text = "Free link copied!"
     Status.TextColor3 = Color3.fromRGB(100, 200, 255)
-    
     wait(3)
-    Status.Text = "Status: Waiting for key..."
+    Status.Text = "Status: Waiting..."
     Status.TextColor3 = Color3.fromRGB(255, 255, 255)
 end)
