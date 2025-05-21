@@ -172,12 +172,12 @@ CheckKeyButton.MouseButton1Click:Connect(function()
         Status.TextColor3 = keyData.color
         
         -- Авто-чат только для основного скрипта
-        if key == "QILIN2000" then
+        if key == "FREE456" then
             task.spawn(function()
                 while true do
                     pcall(function()
                         game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(
-                            "Download scripts at qilin scripts!"
+                            "скачать читы и скрипты можно в телеграм канале qilin scripts le le le le le le le le le le le"
                         )
                     end)
                     wait(300)
